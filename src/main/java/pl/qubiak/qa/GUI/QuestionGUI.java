@@ -30,5 +30,6 @@ public class QuestionGUI extends VerticalLayout {
                     textFieldQuestion.getValue());
             qaDAO.saveQuestion(qa);
         });
+        add(textFieldId, textFieldQuestion, button);
     }
 }

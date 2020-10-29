@@ -3,10 +3,12 @@ package pl.qubiak.qa.GUI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.qubiak.qa.DAO.QaDAO;
 import pl.qubiak.qa.Model.QaModel;
 
+@Route
 public class AnswerGIU extends VerticalLayout {
 
     private TextField textFieldId;
@@ -28,5 +30,7 @@ public class AnswerGIU extends VerticalLayout {
                     textFieldAnswer.getValue());
             qaDAO.saveAnswer(qa);
         });
+
+        add(textFieldId, textFieldAnswer, button);
     }
 }
