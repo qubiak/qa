@@ -10,11 +10,16 @@ public class QaModel {
     private String answer;
     private int counter;
 
-    public QaModel(int id, String question) {
+    public QaModel(int id, String question, String answer, int counter) {
         this.id = id;
         this.question = question;
         this.answer = answer;
         this.counter = counter;
+    }
+
+    public QaModel(int id, String answer) {
+        this.id = id;
+        this.answer = answer;
     }
 
     public int getId() {
