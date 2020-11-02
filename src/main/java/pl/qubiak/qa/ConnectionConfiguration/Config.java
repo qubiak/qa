@@ -27,7 +27,10 @@ public class Config {
         return dataSourceBuilder.build();
     }
 
-    /*
+/*
+
+tworzy nam to już bazę.
+
     @Bean
     public JdbcTemplate getJdbcTemplate() {
         return new JdbcTemplate(getDataSource());
@@ -39,6 +42,7 @@ public class Config {
         getJdbcTemplate().update(sql);
     }
 
-     */
+
+ */
 
 }

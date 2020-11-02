@@ -17,9 +17,13 @@ public class QaModel {
         this.counter = counter;
     }
 
-    public QaModel(int id, String answer) {
-        this.id = id;
+    public QaModel(String answer) {
         this.answer = answer;
+    }
+
+    public QaModel(int id, String question) {
+        this.id = id;
+        this.question = question;
     }
 
     public int getId() {
@@ -49,6 +53,7 @@ public class QaModel {
     public int getCounter() {
         return counter;
     }
+
 
     public void setCounter(int counter) {
         this.counter = counter;

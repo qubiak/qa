@@ -26,7 +26,6 @@ public class AnswerGIU extends VerticalLayout {
 
         button.addClickListener(x -> {
             QaModel qa = new QaModel(
-                    Integer.parseInt(textFieldId.getValue()),
                     textFieldAnswer.getValue());
             qaDAO.saveAnswer(qa);
         });

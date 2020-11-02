@@ -2,7 +2,6 @@ package pl.qubiak.qa.DAO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.event.EventListener;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -21,6 +20,7 @@ public class QaDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    /*
     public void saveEverything(QaModel qa) {
         String sql = "INSERT INTO qa VALUES (?, ?, ?, ?);";
         jdbcTemplate.update(sql, new Object[]{
@@ -31,38 +31,45 @@ public class QaDAO {
         });
     }
 
-    /*
-    Jak chce tak ręcznie dodać coś do bazy to też się nie dodaje
-
     @EventListener(ApplicationReadyEvent.class)
-    public void dbInit() {
+    public void dbInit2() {
         saveEverything(new QaModel(1,"Czy ziemia jest okrągła", "A czy księżyc świeci", 0));
     }
 
-     */
+    @EventListener(ApplicationReadyEvent.class)
+    public void dbInit3() {
+        saveEverything(new QaModel("Czy to zadziałą?"));
+    }
+
+
+ */
+
 
     public void saveQuestion(QaModel qa) {
-        String sql = "INSERT INTO qa VALUES (?, ?)";
+        String sql = "INSERT INTO qa VALUES (?, ?);";
         jdbcTemplate.update(sql, new Object[]{
-            qa.getId(),
-            qa.getQuestion()
+                qa.getId(),
+                qa.getQuestion()
         });
     }
 
     public void saveAnswer(QaModel qa) {
-        String sql = "INSERT INTO qa VALUES (?, ?)";
+        String sql = "INSERT INTO qa VALUES (?, ?);";
         jdbcTemplate.update(sql, new Object[]{
                 qa.getId(),
                 qa.getAnswer()
         });
     }
 
+    /*
     public void saveCounter(QaModel qa){
-        String sql = "INSERT INTO qa VALUES ?";
+        String sql = "INSERT INTO qa VALUES ?;";
         jdbcTemplate.update(sql, new Object[]{
                 qa.getCounter()
         });
     }
+
+     */
 
     public List<Map<String, Object>> showById(int id){
         String sql = "SELECT * FROM qa WHERE id LIKE ?";
