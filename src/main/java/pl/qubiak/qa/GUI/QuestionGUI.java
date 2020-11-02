@@ -6,12 +6,10 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.qubiak.qa.DAO.QaDAO;
-import pl.qubiak.qa.Model.QaModel;
 
 @Route
 public class QuestionGUI extends VerticalLayout {
 
-    private TextField textFieldId;
     private TextField textFieldQuestion;
     private Button button;
     private QaDAO qaDAO;
@@ -19,17 +17,13 @@ public class QuestionGUI extends VerticalLayout {
     @Autowired
     public QuestionGUI(QaDAO qaDAO) {
 
-        this.textFieldId = new TextField("ID");
         this.textFieldQuestion = new TextField("Question");
         this.button = new Button("Save");
         this.qaDAO = qaDAO;
 
         button.addClickListener(x -> {
-            QaModel qa = new QaModel(
-                    Integer.parseInt(textFieldId.getValue()),
-                    textFieldQuestion.getValue());
-            qaDAO.saveQuestion(qa);
+                    qaDAO.saveQuestion(textFieldQuestion.getValue());
         });
-        add(textFieldId, textFieldQuestion, button);
+        add(textFieldQuestion, button);
     }
 }

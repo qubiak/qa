@@ -6,7 +6,6 @@ import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import pl.qubiak.qa.DAO.QaDAO;
-
 import java.util.List;
 import java.util.Map;
 

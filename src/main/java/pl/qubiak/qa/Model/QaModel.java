@@ -8,23 +8,7 @@ public class QaModel {
     private int id;
     private String question;
     private String answer;
-    private int counter;
-
-    public QaModel(int id, String question, String answer, int counter) {
-        this.id = id;
-        this.question = question;
-        this.answer = answer;
-        this.counter = counter;
-    }
-
-    public QaModel(String answer) {
-        this.answer = answer;
-    }
-
-    public QaModel(int id, String question) {
-        this.id = id;
-        this.question = question;
-    }
+    private int like_counter;
 
     public int getId() {
         return id;
@@ -51,11 +35,10 @@ public class QaModel {
     }
 
     public int getCounter() {
-        return counter;
+        return like_counter;
     }
-
-
+    
     public void setCounter(int counter) {
-        this.counter = counter;
+        this.like_counter = counter;
     }
 }

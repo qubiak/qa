@@ -7,36 +7,32 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.qubiak.qa.DAO.QaDAO;
-import pl.qubiak.qa.Model.QaModel;
-
 import java.util.List;
 import java.util.Map;
 
 @Route
-public class AnswerGIU extends VerticalLayout {
+public class DelateByIdGIU extends VerticalLayout {
 
     private TextArea textAreaAllQuestion;
-    public static TextField textFieldId;
-    private TextField textFieldAnswer;
+    private TextField textFieldId;
     private Button button;
     private QaDAO qaDAO;
 
     @Autowired
-    public AnswerGIU(QaDAO qaDAO) {
+    public DelateByIdGIU(QaDAO qaDAO) {
 
         this.textAreaAllQuestion = new TextArea("All question");
         this.textFieldId = new TextField("ID");
-        this.textFieldAnswer = new TextField("Answer");
-        this.button = new Button("Save");
+        this.button = new Button("Delate");
         this.qaDAO = qaDAO;
 
         List<Map<String, Object>> QaMapAll = qaDAO.showIdAndQuestion();
         textAreaAllQuestion.setValue(QaMapAll.toString());
 
         button.addClickListener(x -> {
-                    qaDAO.saveAnswer(Integer.parseInt(textFieldId.getValue()), textFieldAnswer.getValue());
+                    qaDAO.delateByID(Integer.parseInt(textFieldId.getValue()));
         });
 
-        add(textAreaAllQuestion, textFieldId, textFieldAnswer, button);
+        add(textAreaAllQuestion, textFieldId, button);
     }
 }
