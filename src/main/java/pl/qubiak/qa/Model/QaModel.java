@@ -37,7 +37,7 @@ public class QaModel {
     public int getCounter() {
         return like_counter;
     }
-    
+
     public void setCounter(int counter) {
         this.like_counter = counter;
     }

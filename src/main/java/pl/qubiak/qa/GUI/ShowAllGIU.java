@@ -5,8 +5,9 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.router.Route;
 import pl.qubiak.qa.DAO.QaDAO;
+import pl.qubiak.qa.Model.QaModel;
+
 import java.util.List;
-import java.util.Map;
 
 @Route
 public class ShowAllGIU extends VerticalLayout {
@@ -21,7 +22,7 @@ public class ShowAllGIU extends VerticalLayout {
         this.qaDAO = qaDAO;
 
         button.addClickListener(X -> {
-            List<Map<String, Object>> QaMapAll = qaDAO.showEverything();
+            List<QaModel> QaMapAll = qaDAO.showEverything();
             textArea.setValue(QaMapAll.toString());
         });
         add(textArea, button);

@@ -3,8 +3,12 @@ package pl.qubiak.qa.DAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import pl.qubiak.qa.Model.QaModel;
+import pl.qubiak.qa.RowMapper.QaRowMapper;
+
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Repository
 public class QaDAO {
@@ -17,38 +21,53 @@ public class QaDAO {
     }
 
     public void saveQuestion(String question) {
-        String sql = "INSERT INTO qa (question) VALUES (?);";
+        String sql = "INSERT INTO qa (question, like_counter) VALUES (?, 0);";
         jdbcTemplate.update(sql, new Object[]{question});
-
-        System.out.println(question);
     }
 
     public void saveAnswer(int id, String answer) {
         String sql = "UPDATE qa SET answer = ? WHERE id = ?";
         jdbcTemplate.update(sql, new Object[]{answer, id});
-
-        System.out.println(id);
-        System.out.println(answer);
     }
 
-    public List<Map<String, Object>> showById(int id){
-        String sql = "SELECT * FROM qa WHERE id LIKE ?";
+    public List<Map<String, Object>> showById(int id) {
+        String sql = "SELECT * FROM qa WHERE id = ?";
         return jdbcTemplate.queryForList(sql, new Object[]{id});
     }
 
-    public List<Map<String, Object>> showEverything() {
+    public List<QaModel> showEverything() {
         String sql = "SELECT * FROM qa";
-        return jdbcTemplate.queryForList(sql, new Object[]{});
+        List<QaModel> qaModels = jdbcTemplate.query(sql, new QaRowMapper());
+        return qaModels;
     }
 
     public List<Map<String, Object>> showIdAndQuestion() {
         String sql = "SELECT CONCAT(id, '. ', question) FROM qa";
         return jdbcTemplate.queryForList(sql, new Object[]{});
-    };
+    }
+
 
     public void delateByID(int id) {
         String sql = "DELETE FROM `qa` WHERE `qa`.`id` = ?;";
         jdbcTemplate.update(sql, new Object[]{id});
+    }
+
+    public int readAcctuallyLiktCounter(int id) {
+        String sql = "SELECT like_counter FROM qa WHERE id = '?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{id}, new QaRowMapper()).getCounter();
+    }
+
+
+
+
+    public void saveLikeCounter(int id, int like_counter) {
+        String sql = "UPDATE qa SET like_counter = ? where ID = ?";
+        jdbcTemplate.update(sql, new Object[]{id, like_counter});
+    }
+
+    public void saveDissLikeCounter(int id) {
+        String sql = "UPDATE qa SET like_counter = like_counter - 1 where ID = ?";
+        jdbcTemplate.update(sql, id);
     }
 
     /*

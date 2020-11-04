@@ -16,7 +16,7 @@ import java.util.Map;
 public class AnswerGIU extends VerticalLayout {
 
     private TextArea textAreaAllQuestion;
-    public static TextField textFieldId;
+    private TextField textFieldId;
     private TextField textFieldAnswer;
     private Button button;
     private QaDAO qaDAO;
