@@ -42,12 +42,14 @@ public class LikeAndUnlikeGIU extends VerticalLayout {
 
 
         buttonLike.addClickListener(x -> {
-            int acctuallyLikeCounter = qaDAO.readAcctuallyLiktCounter(Integer.parseInt(textFieldId.getValue()));
-            qaDAO.saveLikeCounter(Integer.parseInt(textFieldId.getValue()), acctuallyLikeCounter + 1);
+            qaDAO.readAcctuallyLiktCounter(Integer.parseInt(textFieldId.getValue()));
+            qaDAO.saveLikeCounter(Integer.parseInt(textFieldId.getValue()));
         });
 
-        buttonLike.addClickListener(x -> {
+        buttonDisslike.addClickListener(x -> {
+            qaDAO.readAcctuallyLiktCounter(Integer.parseInt(textFieldId.getValue()));
             qaDAO.saveDissLikeCounter(Integer.parseInt(textFieldId.getValue()));
+
         });
         add(textAreaAllQuestion, textFieldId, buttonLike, buttonDisslike, textAreaQuestionByLikeCounter);
 

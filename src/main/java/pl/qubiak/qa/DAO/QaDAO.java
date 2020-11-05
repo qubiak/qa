@@ -52,13 +52,13 @@ public class QaDAO {
     }
 
     public int readAcctuallyLiktCounter(int id) {
-        String sql = "SELECT like_counter FROM qa WHERE id = 1";
+        String sql = "SELECT * FROM qa WHERE id = ?";
         return jdbcTemplate.queryForObject(sql, new Object[]{id}, new QaRowMapper()).getCounter();
     }
 
-    public void saveLikeCounter(int id, int like_counter) {
-        String sql = "UPDATE qa SET like_counter = ? where ID = ?";
-        jdbcTemplate.update(sql, new Object[]{id, like_counter});
+    public void saveLikeCounter(int id) {
+        String sql = "UPDATE qa SET like_counter = like_counter + 1 where ID = ?";
+        jdbcTemplate.update(sql, id);
     }
 
     public void saveDissLikeCounter(int id) {
