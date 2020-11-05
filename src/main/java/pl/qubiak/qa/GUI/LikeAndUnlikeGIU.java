@@ -1,5 +1,7 @@
 package pl.qubiak.qa.GUI;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
@@ -9,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pl.qubiak.qa.DAO.QaDAO;
 import pl.qubiak.qa.Model.QaModel;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Route
@@ -22,7 +26,7 @@ public class LikeAndUnlikeGIU extends VerticalLayout {
     private QaDAO qaDAO;
 
     @Autowired
-    public LikeAndUnlikeGIU(QaDAO qaDAO) {
+    public LikeAndUnlikeGIU(QaDAO qaDAO) throws JsonProcessingException {
 
         this.textAreaAllQuestion = new TextArea("All question");
         this.textAreaQuestionByLikeCounter = new TextArea("All question after sorting");
@@ -31,19 +35,30 @@ public class LikeAndUnlikeGIU extends VerticalLayout {
         this.buttonDisslike = new Button("DissLike");
         this.qaDAO = qaDAO;
 
+        ObjectMapper objectMapper = new ObjectMapper();
         List<QaModel> QaMapAll = qaDAO.showEverything();
-        textAreaAllQuestion.setValue(QaMapAll.toString());
 
-        buttonLike.addClickListener( x -> {
+            textAreaAllQuestion.setValue(objectMapper.writeValueAsString(QaMapAll));
+
+
+        buttonLike.addClickListener(x -> {
             int acctuallyLikeCounter = qaDAO.readAcctuallyLiktCounter(Integer.parseInt(textFieldId.getValue()));
-            qaDAO.saveLikeCounter(Integer.parseInt(textFieldId.getValue()), acctuallyLikeCounter+1);
+            qaDAO.saveLikeCounter(Integer.parseInt(textFieldId.getValue()), acctuallyLikeCounter + 1);
         });
 
-        buttonLike.addClickListener( x -> {
+        buttonLike.addClickListener(x -> {
             qaDAO.saveDissLikeCounter(Integer.parseInt(textFieldId.getValue()));
         });
         add(textAreaAllQuestion, textFieldId, buttonLike, buttonDisslike, textAreaQuestionByLikeCounter);
 
+        class sortByCounter implements Comparator<QaModel> {
+            public int compare(QaModel a, QaModel b) {
+                return a.getCounter() - b.getCounter();
+            }
+        }
+
+        Collections.sort(QaMapAll, new sortByCounter());
+            textAreaQuestionByLikeCounter.setValue(objectMapper.writeValueAsString(QaMapAll));
 
 
     }

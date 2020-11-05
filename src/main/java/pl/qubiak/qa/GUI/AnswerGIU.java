@@ -1,5 +1,7 @@
 package pl.qubiak.qa.GUI;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
@@ -30,8 +32,13 @@ public class AnswerGIU extends VerticalLayout {
         this.button = new Button("Save");
         this.qaDAO = qaDAO;
 
-        List<Map<String, Object>> QaMapAll = qaDAO.showIdAndQuestion();
-        textAreaAllQuestion.setValue(QaMapAll.toString());
+        ObjectMapper objectMapper = new ObjectMapper();
+        List<QaModel> QaMapAll = qaDAO.showEverything();
+        try {
+            textAreaAllQuestion.setValue(objectMapper.writeValueAsString(QaMapAll));
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
 
         button.addClickListener(x -> {
                     qaDAO.saveAnswer(Integer.parseInt(textFieldId.getValue()), textFieldAnswer.getValue());

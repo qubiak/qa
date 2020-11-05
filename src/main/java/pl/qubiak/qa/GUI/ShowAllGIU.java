@@ -8,6 +8,7 @@ import pl.qubiak.qa.DAO.QaDAO;
 import pl.qubiak.qa.Model.QaModel;
 
 import java.util.List;
+import java.util.Map;
 
 @Route
 public class ShowAllGIU extends VerticalLayout {

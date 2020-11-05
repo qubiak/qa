@@ -8,7 +8,6 @@ import pl.qubiak.qa.RowMapper.QaRowMapper;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 @Repository
 public class QaDAO {
@@ -53,12 +52,9 @@ public class QaDAO {
     }
 
     public int readAcctuallyLiktCounter(int id) {
-        String sql = "SELECT like_counter FROM qa WHERE id = '?";
+        String sql = "SELECT like_counter FROM qa WHERE id = 1";
         return jdbcTemplate.queryForObject(sql, new Object[]{id}, new QaRowMapper()).getCounter();
     }
-
-
-
 
     public void saveLikeCounter(int id, int like_counter) {
         String sql = "UPDATE qa SET like_counter = ? where ID = ?";
