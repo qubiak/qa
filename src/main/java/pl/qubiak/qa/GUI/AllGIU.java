@@ -1,9 +1,9 @@
 package pl.qubiak.qa.GUI;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,29 +33,22 @@ public class AllGIU extends FormLayout {
         this.buttonLike = new Button("Like");
         this.buttonDissLike = new Button("DissLike");
 
-        ObjectMapper objectMapper = new ObjectMapper();
-
         for (int i = 0; i < qaDAO.showEverything().size(); i++) {
-            this.textAreaQuestionAndAnswer = new TextArea("Question: " + (i + 1) + " LikeCount: " + qaDAO.showEverything().get(i).getCounter());
+            this.textAreaQuestionAndAnswer = new TextArea("Question: " + (i + 1) + " LikeCount: "
+                    + qaDAO.showEverything().get(i).getCounter());
 
             String question = qaDAO.showEverything().get(i).getQuestion();
             String answer = qaDAO.showEverything().get(i).getAnswer();
-//jak zrobić by odpowiedź była w linijce pod pytaniem?
-            textAreaQuestionAndAnswer.setValue(objectMapper.writeValueAsString("question: " + question +"answer: " + answer));
+            textAreaQuestionAndAnswer.setValue("Question: " + question +"\n"+ "Answer: " + answer);
             add(textAreaQuestionAndAnswer);
-
         }
 
         textAreaQuestionAndAnswer.addFocusListener(x -> {
 //jak tu zrobić by zamiast 1 pobierało się pytanie tego klikniętego textAreaQuestionAndAnswer?
             String question = qaDAO.showEverything().get(1).getQuestion();
             String answer = qaDAO.showEverything().get(1).getAnswer();
-            try {
-                textAreaQuestion.setValue(objectMapper.writeValueAsString(question));
-                textAreaAnswer.setValue(objectMapper.writeValueAsString(answer));
-            } catch (JsonProcessingException e) {
-                e.printStackTrace();
-            }
+            textAreaQuestion.setValue(question);
+            textAreaAnswer.setValue(answer);
         });
 
         buttonSaveQuestion.addClickListener( x -> {
@@ -78,8 +71,10 @@ by dokończyć buttonLikw i buttonDissLike musze wiedzieć jak pobrać id
         });
   */
 
-
-        add(textAreaQuestion, textAreaAnswer, buttonSaveQuestion, buttonSaveAnswer, buttonLike, buttonDissLike);
+        if(qaDAO.showEverything().size() % 2 == 1) {
+            add(new Label());
+        }
+        add( textAreaQuestion, textAreaAnswer, buttonSaveQuestion, buttonSaveAnswer, buttonLike, buttonDissLike);
 
     }
 }
