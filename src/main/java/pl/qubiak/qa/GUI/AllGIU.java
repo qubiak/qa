@@ -41,7 +41,7 @@ public class AllGIU extends FormLayout {
             String question = qaDAO.showEverything().get(i).getQuestion();
             String answer = qaDAO.showEverything().get(i).getAnswer();
 //jak zrobić by odpowiedź była w linijce pod pytaniem?
-            textAreaQuestionAndAnswer.setValue(objectMapper.writeValueAsString(question + answer));
+            textAreaQuestionAndAnswer.setValue(objectMapper.writeValueAsString("question: " + question +"answer: " + answer));
             add(textAreaQuestionAndAnswer);
 
         }
@@ -61,11 +61,11 @@ public class AllGIU extends FormLayout {
         buttonSaveQuestion.addClickListener( x -> {
             qaDAO.saveQuestion(textAreaQuestion.getValue());
         });
-
+/*
         buttonSaveAnswer.addClickListener( x -> {
-            qaDAO.saveAnswer(Integer.parseInt( /* jak tu pobrać id z klikniętego textAreaQuestionAndAnswer*/ textAreaAnswer.getValue());
+            qaDAO.saveAnswer(Integer.parseInt( jak tu pobrać id z klikniętego textAreaQuestionAndAnswer textAreaAnswer.getValue());
         });
-//by dokończyć buttonLikw i buttonDissLike musze wiedzieć jak pobrać id
+by dokończyć buttonLikw i buttonDissLike musze wiedzieć jak pobrać id
 
         buttonLike.addClickListener( x -> {
             qaDAO.readAcctuallyLiktCounter();
@@ -76,6 +76,8 @@ public class AllGIU extends FormLayout {
             qaDAO.readAcctuallyLiktCounter();
             qaDAO.saveDissLikeCounter();
         });
+  */
+
 
         add(textAreaQuestion, textAreaAnswer, buttonSaveQuestion, buttonSaveAnswer, buttonLike, buttonDissLike);
 
