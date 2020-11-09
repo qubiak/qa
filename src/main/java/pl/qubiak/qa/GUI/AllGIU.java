@@ -1,6 +1,5 @@
 package pl.qubiak.qa.GUI;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Label;
@@ -13,6 +12,7 @@ import pl.qubiak.qa.DAO.AnswerDAO;
 import pl.qubiak.qa.DAO.QuestionDAO;
 import pl.qubiak.qa.Model.Answer;
 import pl.qubiak.qa.Model.Question;
+import pl.qubiak.qa.Sorting.SortByCounter;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -30,22 +30,16 @@ public class AllGIU extends VerticalLayout {
         this.answerDAO = answerDAO;
 
         List<Question> allQuestions = questionDAO.showEverything();
+
         List<Answer> allAnswer = answerDAO.showEverythingFromAnswer();
         add(new H1("Question and Answer"));
-
         for (int i = 0; i < allQuestions.size(); i++) {
-            class sortByCounter implements Comparator<Question> {
-                public int compare(Question a, Question b) {
-                    return b.getCounter() - a.getCounter();
-                }
-            }
-            Collections.sort(allQuestions, new sortByCounter());
-
             TextArea questionTextArea = new TextArea("Question: " + allQuestions.get(i).getId() + " LikeCount: " + allQuestions.get(i).getCounter());
             Button buttonLike = new Button("+");
             Button buttonDissLike = new Button("-");
-
-            questionTextArea.setValue(allQuestions.get(i).getQuestion());
+            Collections.sort(allQuestions, new SortByCounter());
+            questionTextArea.setValue(
+                    allQuestions.get(i).getQuestion());
 
             add(questionTextArea,
                     new HorizontalLayout(buttonLike, buttonDissLike));
