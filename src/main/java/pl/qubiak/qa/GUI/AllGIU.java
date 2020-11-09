@@ -9,7 +9,8 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
-import pl.qubiak.qa.DAO.QaDAO;
+import pl.qubiak.qa.DAO.AnswerDAO;
+import pl.qubiak.qa.DAO.QuestionDAO;
 import pl.qubiak.qa.Model.Answer;
 import pl.qubiak.qa.Model.Question;
 
@@ -20,14 +21,16 @@ import java.util.List;
 @Route
 public class AllGIU extends VerticalLayout {
 
-    private QaDAO qaDAO;
+    private QuestionDAO questionDAO;
+    private AnswerDAO answerDAO;
 
     @Autowired
-    public AllGIU(QaDAO qaDAO) throws JsonProcessingException {
-        this.qaDAO = qaDAO;
+    public AllGIU(AnswerDAO answerDAO, QuestionDAO questionDAO) {
+        this.questionDAO = questionDAO;
+        this.answerDAO = answerDAO;
 
-        List<Question> allQuestions = qaDAO.showEverything();
-        List<Answer> allAnswer = qaDAO.showEverythingFromAnswer();
+        List<Question> allQuestions = questionDAO.showEverything();
+        List<Answer> allAnswer = answerDAO.showEverythingFromAnswer();
         add(new H1("Question and Answer"));
 
         for (int i = 0; i < allQuestions.size(); i++) {
@@ -59,18 +62,18 @@ public class AllGIU extends VerticalLayout {
             Button buttonSaveAnswer = new Button("Save Answer");
             int finalI = i;
             buttonSaveAnswer.addClickListener(x -> {
-                qaDAO.saveAnswer(allQuestions.get(finalI).getId(), answerTextArea.getValue());
+                answerDAO.saveAnswer(allQuestions.get(finalI).getId(), answerTextArea.getValue());
             });
             add(buttonSaveAnswer);
 
             buttonLike.addClickListener(x -> {
-                qaDAO.readAcctuallyLiktCounter(allQuestions.get(finalI).getId());
-                qaDAO.saveLikeCounter(allQuestions.get(finalI).getId());
+                questionDAO.readAcctuallyLiktCounter(allQuestions.get(finalI).getId());
+                questionDAO.saveLikeCounter(allQuestions.get(finalI).getId());
             });
 
             buttonDissLike.addClickListener(x -> {
-                qaDAO.readAcctuallyLiktCounter(allQuestions.get(finalI).getId());
-                qaDAO.saveDissLikeCounter(allQuestions.get(finalI).getId());
+                questionDAO.readAcctuallyLiktCounter(allQuestions.get(finalI).getId());
+                questionDAO.saveDissLikeCounter(allQuestions.get(finalI).getId());
             });
         }
     }

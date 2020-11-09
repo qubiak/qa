@@ -3,32 +3,24 @@ package pl.qubiak.qa.DAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import pl.qubiak.qa.Model.Answer;
 import pl.qubiak.qa.Model.Question;
-import pl.qubiak.qa.RowMapper.AnswerRowMapper;
 import pl.qubiak.qa.RowMapper.QuestionRowMapper;
-
 import java.util.List;
 import java.util.Map;
 
 @Repository
-public class QaDAO {
+public class QuestionDAO {
 
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public QaDAO(JdbcTemplate jdbcTemplate) {
+    public QuestionDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
     public void saveQuestion(String question) {
         String sql = "INSERT INTO qa (question, like_counter) VALUES (?, 0);";
         jdbcTemplate.update(sql, new Object[]{question});
-    }
-
-    public void saveAnswer(int questionId, String answer) {
-        String sql = "INSERT INTO qaanswer (questionId, answer) VALUES (?, ?);";
-        jdbcTemplate.update(sql, new Object[]{answer, questionId});
     }
 
     public List<Map<String, Object>> showById(int id) {
@@ -42,11 +34,6 @@ public class QaDAO {
         return questions;
     }
 
-    public List<Answer> showEverythingFromAnswer() {
-        String sql ="SELECT * FROM qaanswer";
-        List<Answer> answers = jdbcTemplate.query(sql, new AnswerRowMapper());
-        return answers;
-    }
 
     public List<Map<String, Object>> showIdAndQuestion() {
         String sql = "SELECT CONCAT(id, '. ', question) FROM qa";
