@@ -49,10 +49,10 @@ public class AllGIU extends VerticalLayout {
 
             TextArea answerTextArea = new TextArea("Answer:");
 
-            if (allAnswer.get(i).getAnswer(resultSet.getString("answer")) == null) {
+            if (allAnswer.get(i).getAnswer() == null) {
                 answerTextArea.setValue("");
             } else
-                answerTextArea.setValue(allAnswer.get(i).getAnswer(resultSet.getString("answer")));
+                answerTextArea.setValue(allAnswer.get(i).getAnswer());
 
             add(new HorizontalLayout(new Label(), answerTextArea));
 
