@@ -30,8 +30,13 @@ public class Config {
 
     @EventListener(ApplicationReadyEvent.class)
     public void dbInit() {
-        String sql = "CREATE TABLE qa(id int AUTO_INCREMENT, question varchar(255), answer varchar(255), like_counter int, PRIMARY KEY (id));";
+        String sql = "CREATE TABLE qa(id int AUTO_INCREMENT, question varchar(255), like_counter int, PRIMARY KEY (id));";
         getJdbcTemplate().update(sql);
     }
+
+    @EventListener(ApplicationReadyEvent.class)
+    public void dbInit2() {
+        String sql = "CREATE TABLE qaanswer ( `id` INT NOT NULL AUTO_INCREMENT , `questionId` INT NOT NULL , `answer` VARCHAR(255) NOT NULL , PRIMARY KEY (`id`));";
+        getJdbcTemplate().update(sql);
      */
 }

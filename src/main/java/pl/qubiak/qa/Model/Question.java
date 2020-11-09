@@ -2,12 +2,11 @@ package pl.qubiak.qa.Model;
 
 import com.vaadin.flow.component.polymertemplate.Id;
 
-public class QaModel {
+public class Question {
 
     @Id
     private int id;
     private String question;
-    private String answer;
     private int like_counter;
 
     public int getId() {
@@ -26,14 +25,6 @@ public class QaModel {
         this.question = question;
     }
 
-    public String getAnswer() {
-        return answer;
-    }
-
-    public void setAnswer(String answer) {
-        this.answer = answer;
-    }
-
     public int getCounter() {
         return like_counter;
     }
@@ -42,3 +33,4 @@ public class QaModel {
         this.like_counter = counter;
     }
 }
+
