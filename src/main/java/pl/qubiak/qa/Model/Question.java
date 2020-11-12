@@ -32,5 +32,24 @@ public class Question {
     public void setCounter(int counter) {
         this.like_counter = counter;
     }
+
+    public Question withQuestion(final String question) {
+        this.question = question;
+        return this;
+    }
+
+    public Question withCounter(final int like_counter) {
+        this.like_counter = like_counter;
+        return this;
+    }
+
+    public Question(int id, String question, int like_counter) {
+        this.id = id;
+        this.question = question;
+        this.like_counter = like_counter;
+    }
+
+    public Question() {
+    }
 }
 
