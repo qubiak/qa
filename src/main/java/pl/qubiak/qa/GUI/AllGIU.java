@@ -1,8 +1,10 @@
 package pl.qubiak.qa.GUI;
 
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.listbox.ListBox;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
@@ -15,8 +17,8 @@ import pl.qubiak.qa.Model.Question;
 import pl.qubiak.qa.Sorting.SortByCounter;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 @Route
 public class AllGIU extends VerticalLayout {
@@ -31,34 +33,53 @@ public class AllGIU extends VerticalLayout {
 
         List<Question> allQuestions = questionDAO.showEverything();
 
-        List<Answer> allAnswer = answerDAO.showEverythingFromAnswer();
         add(new H1("Question and Answer"));
+        TextArea emptyQuestionTextArea = new TextArea("Add new Question");
+        Button buttonSaveQuestion = new Button("Save new question");
+        Collections.sort(allQuestions, new SortByCounter());
+        add(emptyQuestionTextArea, buttonSaveQuestion);
         for (int i = 0; i < allQuestions.size(); i++) {
+            int finalI = i;
             TextArea questionTextArea = new TextArea("Question: " + allQuestions.get(i).getId() + " LikeCount: " + allQuestions.get(i).getCounter());
+
             Button buttonLike = new Button("+");
             Button buttonDissLike = new Button("-");
-            Collections.sort(allQuestions, new SortByCounter());
-            questionTextArea.setValue(
-                    allQuestions.get(i).getQuestion());
 
-            add(questionTextArea,
+
+            questionTextArea.setValue(allQuestions.get(i).getQuestion());
+
+            add(new HorizontalLayout(questionTextArea, new Label("")),
                     new HorizontalLayout(buttonLike, buttonDissLike));
 
-            TextArea answerTextArea = new TextArea("Answer:");
+            List<Answer> answerByQuestionId = answerDAO.showAnswerByQuestionId(allQuestions.get(i).getId());
+            TextArea newAnswerTextArea = new TextArea("new answer:");
+            for (int j = 0; j < answerByQuestionId.size(); j++) {
+                TextArea answerTextArea = new TextArea("Answer:");
+                if (answerByQuestionId.get(j).getAnswer() == null) {
+                    answerTextArea.setValue("---");
+                } else
+                    answerTextArea.setValue(answerByQuestionId.get(j).getAnswer());
 
-            if (allAnswer.get(i).getAnswer() == null) {
-                answerTextArea.setValue("");
-            } else
-                answerTextArea.setValue(allAnswer.get(i).getAnswer());
+                add(new HorizontalLayout(new Label(), answerTextArea));
 
-            add(new HorizontalLayout(new Label(), answerTextArea));
+                Button buttonEditAnswer = new Button("Edit answer");
+                buttonEditAnswer.addClickListener(x -> {
+                    answerDAO.editAnswer(answerByQuestionId.get(finalI).getId(), answerTextArea.getValue());
+                });
+                add(buttonEditAnswer);
 
-            Button buttonSaveAnswer = new Button("Save Answer");
-            int finalI = i;
-            buttonSaveAnswer.addClickListener(x -> {
-                answerDAO.saveAnswer(allQuestions.get(finalI).getId(), answerTextArea.getValue());
+
+
+                buttonSaveQuestion.addClickListener(x -> {
+                    questionDAO.saveQuestion(emptyQuestionTextArea.getValue());
+                });
+            }
+            add(newAnswerTextArea);
+            Button buttonNewSaveAnswer = new Button("Save Answer");
+            buttonNewSaveAnswer.addClickListener(x -> {
+                answerDAO.saveAnswer(allQuestions.get(finalI).getId(), newAnswerTextArea.getValue());
             });
-            add(buttonSaveAnswer);
+            add(buttonNewSaveAnswer);
 
             buttonLike.addClickListener(x -> {
                 questionDAO.readAcctuallyLiktCounter(allQuestions.get(finalI).getId());
@@ -70,5 +91,6 @@ public class AllGIU extends VerticalLayout {
                 questionDAO.saveDissLikeCounter(allQuestions.get(finalI).getId());
             });
         }
+
     }
 }
