@@ -6,15 +6,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pl.qubiak.qa.DAO.QuestionDao;
-import pl.qubiak.qa.Model.Question;
 
 @Controller
 public class QuestionController {
 
     @Autowired
     public QuestionDao questionDAO;
-
-    StringBuilder response = new StringBuilder();
 
     @RequestMapping("/saveQuestion")
     @ResponseBody
@@ -26,9 +23,7 @@ public class QuestionController {
     @RequestMapping("/showAllQuestions")
     @ResponseBody
     public void showAllQuestions() {
-        for (Question i : questionDAO.showEverything()) {
-            response.append(i).append("<br>");
-        }
+        questionDAO.showEverything();
     }
 
     @RequestMapping("/showQuestionsById")
