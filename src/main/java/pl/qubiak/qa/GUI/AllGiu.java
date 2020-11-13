@@ -1,33 +1,29 @@
 package pl.qubiak.qa.GUI;
 
-import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Label;
-import com.vaadin.flow.component.listbox.ListBox;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
-import pl.qubiak.qa.DAO.AnswerDAO;
-import pl.qubiak.qa.DAO.QuestionDAO;
+import pl.qubiak.qa.DAO.AnswerDao;
+import pl.qubiak.qa.DAO.QuestionDao;
 import pl.qubiak.qa.Model.Answer;
 import pl.qubiak.qa.Model.Question;
 import pl.qubiak.qa.Sorting.SortByCounter;
-
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 @Route
-public class AllGIU extends VerticalLayout {
+public class AllGiu extends VerticalLayout {
 
-    private QuestionDAO questionDAO;
-    private AnswerDAO answerDAO;
+    private QuestionDao questionDAO;
+    private AnswerDao answerDAO;
 
     @Autowired
-    public AllGIU(AnswerDAO answerDAO, QuestionDAO questionDAO) {
+    public AllGiu(AnswerDao answerDAO, QuestionDao questionDAO) {
         this.questionDAO = questionDAO;
         this.answerDAO = answerDAO;
 
@@ -40,7 +36,7 @@ public class AllGIU extends VerticalLayout {
         add(emptyQuestionTextArea, buttonSaveQuestion);
         for (int i = 0; i < allQuestions.size(); i++) {
             int finalI = i;
-            TextArea questionTextArea = new TextArea("Question: " + allQuestions.get(i).getId() + " LikeCount: " + allQuestions.get(i).getCounter());
+            TextArea questionTextArea = new TextArea("Question: " + allQuestions.get(i).getId() + " LikeCount: " + allQuestions.get(i).getLike_counter());
 
             Button buttonLike = new Button("+");
             Button buttonDissLike = new Button("-");

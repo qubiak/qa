@@ -14,7 +14,7 @@ public class QuestionRowMapper implements RowMapper <Question> {
         Question question = new Question();
         question.setId(resultSet.getInt("id"));
         question.setQuestion(resultSet.getString("question"));
-        question.setCounter(resultSet.getInt("like_counter"));
+        question.setLike_counter(resultSet.getInt("like_counter"));
 
         return question;
     }

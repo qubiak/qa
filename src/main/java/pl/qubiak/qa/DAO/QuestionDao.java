@@ -9,55 +9,61 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class QuestionDAO {
+public class QuestionDao {
 
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public QuestionDAO(JdbcTemplate jdbcTemplate) {
+    public QuestionDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
     public void saveQuestion(String question) {
-        String sql = "INSERT INTO qa (question, like_counter) VALUES (?, 0);";
+        String sql = "INSERT INTO questiontable (question, like_counter) VALUES (?, 0);";
         jdbcTemplate.update(sql, new Object[]{question});
     }
 
     public List<Map<String, Object>> showById(int id) {
-        String sql = "SELECT * FROM qa WHERE id = ?";
+        String sql = "SELECT * FROM questiontable WHERE id = ?";
         return jdbcTemplate.queryForList(sql, new Object[]{id});
     }
 
+
     public List<Question> showEverything() {
-        String sql = "SELECT * FROM qa";
+        String sql = "SELECT * FROM questiontable";
         List<Question> questions = jdbcTemplate.query(sql, new QuestionRowMapper());
         return questions;
     }
 
 
     public List<Map<String, Object>> showIdAndQuestion() {
-        String sql = "SELECT CONCAT(id, '. ', question) FROM qa";
+        String sql = "SELECT CONCAT(id, '. ', question) FROM questiontable";
         return jdbcTemplate.queryForList(sql, new Object[]{});
     }
 
 
     public void delateByID(int id) {
-        String sql = "DELETE FROM `qa` WHERE `qa`.`id` = ?;";
+        String sql = "DELETE FROM `questiontable` WHERE `questiontable`.`id` = ?;";
         jdbcTemplate.update(sql, new Object[]{id});
     }
 
+    public void delateAll() {
+        String sql = "DELATE * FROM questiontable";
+        jdbcTemplate.update(sql, new Object[]{});
+    }
+
     public int readAcctuallyLiktCounter(int id) {
-        String sql = "SELECT * FROM qa WHERE id = ?";
-        return jdbcTemplate.queryForObject(sql, new Object[]{id}, new QuestionRowMapper()).getCounter();
+        String sql = "SELECT * FROM questiontable WHERE id = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{id}, new QuestionRowMapper()).getLike_counter();
     }
 
     public void saveLikeCounter(int id) {
-        String sql = "UPDATE qa SET like_counter = like_counter + 1 where ID = ?";
+        String sql = "UPDATE questiontable SET like_counter = like_counter + 1 where ID = ?";
         jdbcTemplate.update(sql, id);
     }
 
     public void saveDissLikeCounter(int id) {
-        String sql = "UPDATE qa SET like_counter = like_counter - 1 where ID = ?";
+        String sql = "UPDATE questiontable SET like_counter = like_counter - 1 where ID = ?";
         jdbcTemplate.update(sql, id);
     }
 }

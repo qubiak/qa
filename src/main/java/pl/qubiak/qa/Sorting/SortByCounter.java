@@ -7,7 +7,7 @@ import java.util.Comparator;
 public class SortByCounter implements Comparator<Question> {
 
     public int compare(Question a, Question b) {
-        return b.getCounter() - a.getCounter();
+        return b.getLike_counter() - a.getLike_counter();
     }
 }
     
