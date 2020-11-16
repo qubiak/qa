@@ -1,4 +1,4 @@
-package pl.qubiak.qa.GUI;
+/*package pl.qubiak.qa.GUI;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H1;
@@ -90,3 +90,5 @@ public class AllGiu extends VerticalLayout {
 
     }
 }
+
+ */

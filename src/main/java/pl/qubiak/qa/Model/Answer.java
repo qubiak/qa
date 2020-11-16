@@ -1,11 +1,12 @@
 package pl.qubiak.qa.Model;
 
-import com.vaadin.flow.component.polymertemplate.Id;
+import io.swagger.annotations.ApiModelProperty;
 
 public class Answer {
 
-    @Id
+    @ApiModelProperty(notes = "AUTO_INCREMENT")
     private int id;
+    @ApiModelProperty(notes = "id of the question to which we will add the answer")
     private int questionId;
     private String Answer;
 

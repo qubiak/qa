@@ -1,13 +1,18 @@
 package pl.qubiak.qa.Controller;
 
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pl.qubiak.qa.DAO.AnswerDao;
+import pl.qubiak.qa.Model.Answer;
+
+import java.util.List;
 
 @Controller
+@RequestMapping("/Answer")
 public class AnswerController {
 
     @Autowired
@@ -23,8 +28,8 @@ public class AnswerController {
 
     @RequestMapping("/showEverythingFromAnswer")
     @ResponseBody
-    public void showEverythingFromAnswer() {
-        answerDAO.showEverythingFromAnswer();
+    public List<Answer> showEverythingFromAnswer() {
+        return answerDAO.showEverythingFromAnswer();
     }
 
     @RequestMapping("/showAnswerByQuestionId")

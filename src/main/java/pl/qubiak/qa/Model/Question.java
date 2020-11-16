@@ -1,14 +1,13 @@
 package pl.qubiak.qa.Model;
 
-import com.vaadin.flow.component.polymertemplate.Id;
-
-import java.util.List;
+import io.swagger.annotations.ApiModelProperty;
 
 public class Question {
 
-    @Id
+    @ApiModelProperty(notes = "AUTO_INCREMENT")
     private int id;
     private String question;
+    @ApiModelProperty(notes = "a counter indicating whether a given question is liked or not")
     private int like_counter;
 
     public int getId() {

@@ -1,29 +1,37 @@
 package pl.qubiak.qa.Controller;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pl.qubiak.qa.DAO.QuestionDao;
+import pl.qubiak.qa.Model.Question;
+
+import java.util.List;
 
 @Controller
+@RequestMapping("/Question")
 public class QuestionController {
 
     @Autowired
     public QuestionDao questionDAO;
 
+    @ApiOperation(value = "create new question")
     @RequestMapping("/saveQuestion")
     @ResponseBody
-    public void saveQuestion(
+    public void saveQuestion(@ApiParam(value = "new question", example = "is the earth round")
             @RequestParam("question") String question) {
         questionDAO.saveQuestion(question);
     }
 
+
     @RequestMapping("/showAllQuestions")
     @ResponseBody
-    public void showAllQuestions() {
-        questionDAO.showEverything();
+    public List<Question> showAllQuestions() {
+        return questionDAO.showEverything();
     }
 
     @RequestMapping("/showQuestionsById")
