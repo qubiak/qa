@@ -34,7 +34,7 @@ public class Config {
     public Docket get() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .paths(PathSelectors.ant("/api/**"))
+                .paths(PathSelectors.ant("/**"))
                 .apis(RequestHandlerSelectors.basePackage("pl.qubiak.qa.Controller"))
                 .build().apiInfo(CreateApiInfo());
     }
@@ -67,6 +67,11 @@ public class Config {
     @EventListener(ApplicationReadyEvent.class)
     public void dbInit2() {
         String sql = "CREATE TABLE answer ( `id` INT NOT NULL AUTO_INCREMENT , `questionId` INT NOT NULL , `answer` VARCHAR(255) NOT NULL , PRIMARY KEY (`id`));";
+        getJdbcTemplate().update(sql);
+
+    @EventListener(ApplicationReadyEvent.class)
+    public void dbInit3() {
+        String sql = "CREATE TABLE room ( `id` INT NOT NULL AUTO_INCREMENT , `roomName` VARCHAR(255) NOT NULL , PRIMARY KEY (`id`));";
         getJdbcTemplate().update(sql);
      */
 }

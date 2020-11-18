@@ -22,9 +22,12 @@ public class QuestionController {
     @ApiOperation(value = "create new question")
     @RequestMapping("/saveQuestion")
     @ResponseBody
-    public void saveQuestion(@ApiParam(value = "new question", example = "is the earth round")
-            @RequestParam("question") String question) {
-        questionDAO.saveQuestion(question);
+    public void saveQuestion(@ApiParam(value = "new question", example = "is the earth round?")
+                             @RequestParam("question") String question,
+                             @RequestParam("roomId") int roomId) {
+
+        questionDAO.saveQuestion(question, roomId);
+
     }
 
 
@@ -38,12 +41,18 @@ public class QuestionController {
     @ResponseBody
     public void showQuestionsById(
             @RequestParam("id") int id) {
-            questionDAO.showById(id);
+        questionDAO.showById(id);
     }
+
+    public void showQuestionByRoomId(
+            @RequestParam("roomId") int roomId) {
+        questionDAO.showByRoomId(roomId);
+    }
+
 
     @RequestMapping("/delateAllQuestion")
     @ResponseBody
-    public void delateAllQuestion(){
+    public void delateAllQuestion() {
         questionDAO.delateAll();
     }
 

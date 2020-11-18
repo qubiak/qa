@@ -18,14 +18,19 @@ public class QuestionDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public void saveQuestion(String question) {
+    public void saveQuestion(String question, int roomId) {
         String sql = "INSERT INTO questiontable (question, like_counter) VALUES (?, 0);";
-        jdbcTemplate.update(sql, new Object[]{question});
+        jdbcTemplate.update(sql, new Object[]{question, roomId});
     }
 
     public List<Map<String, Object>> showById(int id) {
         String sql = "SELECT * FROM questiontable WHERE id = ?";
         return jdbcTemplate.queryForList(sql, new Object[]{id});
+    }
+
+    public List<Map<String, Object>> showByRoomId (int roomId) {
+        String sql = "SELECT * FROM QUESTIONTABLE WHERE roomId =?";
+        return  jdbcTemplate.queryForList(sql, new Object[]{roomId});
     }
 
 

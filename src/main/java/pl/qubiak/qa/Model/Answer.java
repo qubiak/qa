@@ -34,12 +34,4 @@ public class Answer {
         Answer = answer;
     }
 
-    public Answer(int id, int questionId, String answer) {
-        this.id = id;
-        this.questionId = questionId;
-        Answer = answer;
-    }
-
-    public Answer() {
-    }
 }

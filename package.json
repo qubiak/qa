@@ -38,7 +38,8 @@
       "@vaadin/vaadin-tabs": "3.2.0",
       "@vaadin/vaadin-radio-button": "1.5.1",
       "@vaadin/vaadin-lumo-styles": "1.6.0",
-      "@vaadin/vaadin-material-styles": "1.3.2"
+      "@vaadin/vaadin-material-styles": "1.3.2",
+      "@vaadin/router": "1.7.2"
     },
     "devDependencies": {
       "webpack-babel-multi-target-plugin": "2.3.3",
@@ -49,14 +50,21 @@
       "webpack": "4.42.0",
       "chokidar": "^3.4.0",
       "webpack-merge": "4.2.2",
-      "webpack-dev-server": "3.11.0"
+      "webpack-dev-server": "3.11.0",
+      "script-ext-html-webpack-plugin": "2.1.4",
+      "validator": "12.0.0",
+      "awesome-typescript-loader": "5.2.1",
+      "lit-html": "1.2.1",
+      "@types/validator": "10.11.3",
+      "lit-element": "2.3.1",
+      "html-webpack-plugin": "3.2.0",
+      "typescript": "3.8.3"
     },
-    "hash": "89c88b68d0081b8a8071c6943c6a25f30d18bed33dae9bafd7b0c2d4e52e2c06"
+    "hash": "09f8c9f18fc34e1e3a8c3e13dd588cceb2dec5a08118252b3a17885e5a69b725"
   },
   "dependencies": {
     "lit-element": "^2.2.1",
     "@polymer/polymer": "3.2.0",
-    "@webcomponents/webcomponentsjs": "^2.2.10",
     "@vaadin/vaadin-icons": "4.3.1",
     "@vaadin/vaadin-grid": "5.7.5",
     "@vaadin/vaadin-split-layout": "4.3.0",
@@ -89,7 +97,10 @@
     "@vaadin/vaadin-tabs": "3.2.0",
     "@vaadin/vaadin-radio-button": "1.5.1",
     "@vaadin/vaadin-lumo-styles": "1.6.0",
-    "@vaadin/vaadin-material-styles": "1.3.2"
+    "@vaadin/vaadin-material-styles": "1.3.2",
+    "@vaadin/flow-frontend": "./target/flow-frontend",
+    "@vaadin/form": "./target/flow-frontend/form",
+    "@webcomponents/webcomponentsjs": "^2.2.10"
   },
   "devDependencies": {
     "webpack-babel-multi-target-plugin": "2.3.3",
@@ -100,6 +111,14 @@
     "webpack": "4.42.0",
     "chokidar": "^3.4.0",
     "webpack-merge": "4.2.2",
-    "webpack-dev-server": "3.11.0"
+    "webpack-dev-server": "3.11.0",
+    "script-ext-html-webpack-plugin": "2.1.4",
+    "validator": "12.0.0",
+    "awesome-typescript-loader": "5.2.1",
+    "lit-html": "1.2.1",
+    "@types/validator": "10.11.3",
+    "lit-element": "2.3.1",
+    "html-webpack-plugin": "3.2.0",
+    "typescript": "3.8.3"
   }
 }

@@ -9,6 +9,8 @@ public class Question {
     private String question;
     @ApiModelProperty(notes = "a counter indicating whether a given question is liked or not")
     private int like_counter;
+    @ApiModelProperty(notes = "the id of the room the question belongs to")
+    private int roomId;
 
     public int getId() {
         return id;
@@ -32,6 +34,14 @@ public class Question {
 
     public void setLike_counter(int like_counter) {
         this.like_counter = like_counter;
+    }
+
+    public int getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(int roomId) {
+        this.roomId = roomId;
     }
 }
 
