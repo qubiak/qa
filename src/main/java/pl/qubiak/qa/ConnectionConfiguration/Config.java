@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
@@ -52,7 +53,7 @@ public class Config {
 
     }
 
-    /*
+/*
     @Bean
     public JdbcTemplate getJdbcTemplate() {
         return new JdbcTemplate(getDataSource());
@@ -66,12 +67,27 @@ public class Config {
 
     @EventListener(ApplicationReadyEvent.class)
     public void dbInit2() {
-        String sql = "CREATE TABLE answer ( `id` INT NOT NULL AUTO_INCREMENT , `questionId` INT NOT NULL , `answer` VARCHAR(255) NOT NULL , PRIMARY KEY (`id`));";
+        String sql = "CREATE TABLE answer ( id INT NOT NULL AUTO_INCREMENT , questionId INT NOT NULL , answer VARCHAR(255) NOT NULL , PRIMARY KEY (id));";
         getJdbcTemplate().update(sql);
+    }
 
     @EventListener(ApplicationReadyEvent.class)
     public void dbInit3() {
-        String sql = "CREATE TABLE room ( `id` INT NOT NULL AUTO_INCREMENT , `roomName` VARCHAR(255) NOT NULL , PRIMARY KEY (`id`));";
+        String sql = "CREATE TABLE room ( id INT NOT NULL AUTO_INCREMENT , roomName VARCHAR(255) NOT NULL , PRIMARY KEY (id));";
         getJdbcTemplate().update(sql);
-     */
+    }
+
+    @EventListener(ApplicationReadyEvent.class)
+    public void dbInit4() {
+        String sql = "CREATE TABLE surveyQuestion ( id INT NOT NULL AUTO_INCREMENT , surveyQuestion VARCHAR(255) NOT NULL , PRIMARY KEY (id));";
+        getJdbcTemplate().update(sql);
+    }
+
+    @EventListener(ApplicationReadyEvent.class)
+    public void dbInit5() {
+        String sql = "CREATE TABLE surveyAnswer ( id INT NOT NULL AUTO_INCREMENT , surveyQuestionId INT NOT NULL, surveyAnswer VARCHAR(255) NOT NULL, numberOfSelections INT NOT NULL, PRIMARY KEY (id);";
+        getJdbcTemplate().update(sql);
+    }
+*/
+
 }

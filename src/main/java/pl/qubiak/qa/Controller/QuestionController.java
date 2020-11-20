@@ -27,9 +27,7 @@ public class QuestionController {
                              @RequestParam("roomId") int roomId) {
 
         questionDAO.saveQuestion(question, roomId);
-
     }
-
 
     @RequestMapping("/showAllQuestions")
     @ResponseBody
