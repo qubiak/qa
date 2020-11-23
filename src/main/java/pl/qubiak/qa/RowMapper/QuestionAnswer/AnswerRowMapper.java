@@ -1,7 +1,7 @@
-package pl.qubiak.qa.RowMapper;
+package pl.qubiak.qa.RowMapper.QuestionAnswer;
 
 import org.springframework.jdbc.core.RowMapper;
-import pl.qubiak.qa.Model.Answer;
+import pl.qubiak.qa.Model.QuestionAnswer.Answer;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -1,6 +1,6 @@
 package pl.qubiak.qa.Sorting;
 
-import pl.qubiak.qa.Model.Question;
+import pl.qubiak.qa.Model.QuestionAnswer.Question;
 
 import java.util.Comparator;
 

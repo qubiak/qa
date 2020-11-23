@@ -1,4 +1,4 @@
-package pl.qubiak.qa.Model;
+package pl.qubiak.qa.Model.QuestionAnswer;
 
 import io.swagger.annotations.ApiModelProperty;
 

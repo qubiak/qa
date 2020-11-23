@@ -1,9 +1,9 @@
-package pl.qubiak.qa.DAO;
+package pl.qubiak.qa.DAO.Room;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import pl.qubiak.qa.Model.Room;
-import pl.qubiak.qa.RowMapper.RoomRowMapper;
+import pl.qubiak.qa.Model.Room.Room;
+import pl.qubiak.qa.RowMapper.Room.RoomRowMapper;
 
 import java.util.List;
 

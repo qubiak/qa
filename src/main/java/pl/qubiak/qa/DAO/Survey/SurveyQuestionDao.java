@@ -15,7 +15,7 @@ public class SurveyQuestionDao {
     }
 
     public void saveSurveyQuestion(String surveyQuestion) {
-        String sql = "INSERT INTO surveqquestion (question) VALUES (?)";
+        String sql = "INSERT INTO surveyquestion (surveyQuestion) VALUES (?)";
         jdbcTemplate.update(sql, new Object[]{surveyQuestion});
     }
 

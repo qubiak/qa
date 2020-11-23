@@ -1,10 +1,10 @@
-package pl.qubiak.qa.DAO;
+package pl.qubiak.qa.DAO.QuestionAnswer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import pl.qubiak.qa.Model.Answer;
-import pl.qubiak.qa.RowMapper.AnswerRowMapper;
+import pl.qubiak.qa.Model.QuestionAnswer.Answer;
+import pl.qubiak.qa.RowMapper.QuestionAnswer.AnswerRowMapper;
 import java.util.List;
 
 @Repository

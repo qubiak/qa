@@ -21,7 +21,7 @@ public class SurveyAnswerDao {
     }
 
     public void delateSurveyAnswerByID(int id) {
-        String sql = "DELETE FROM `surveyAnswer` WHERE `surveyQuestion`.`id` = ?;";
+        String sql = "DELETE FROM surveyAnswer WHERE id = ?;";
         jdbcTemplate.update(sql, new Object[]{id});
     }
 

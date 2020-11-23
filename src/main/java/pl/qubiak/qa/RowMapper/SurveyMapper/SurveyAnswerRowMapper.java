@@ -13,7 +13,7 @@ public class SurveyAnswerRowMapper implements RowMapper<SurveyAnswer> {
 
         SurveyAnswer surveyAnswer = new SurveyAnswer();
         surveyAnswer.setId(resultSet.getInt("id"));
-        surveyAnswer.setSurveyQuestionId(resultSet.getInt("survedQuestionId"));
+        surveyAnswer.setSurveyQuestionId(resultSet.getInt("surveyQuestionId"));
         surveyAnswer.setSurveyAnswer(resultSet.getString("surveyAnswer"));
         surveyAnswer.setNumberOfSelections(resultSet.getInt("numberOfSelections"));
 

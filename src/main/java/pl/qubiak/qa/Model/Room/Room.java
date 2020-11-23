@@ -1,4 +1,4 @@
-package pl.qubiak.qa.Model;
+package pl.qubiak.qa.Model.Room;
 
 import io.swagger.annotations.ApiModelProperty;
 

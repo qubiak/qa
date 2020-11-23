@@ -1,10 +1,10 @@
-package pl.qubiak.qa.DAO;
+package pl.qubiak.qa.DAO.QuestionAnswer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import pl.qubiak.qa.Model.Question;
-import pl.qubiak.qa.RowMapper.QuestionRowMapper;
+import pl.qubiak.qa.Model.QuestionAnswer.Question;
+import pl.qubiak.qa.RowMapper.QuestionAnswer.QuestionRowMapper;
 
 import java.util.List;
 import java.util.Map;
@@ -20,7 +20,7 @@ public class QuestionDao {
     }
 
     public void saveQuestion(String question, int roomId) {
-        String sql = "INSERT INTO question (question, like_counter) VALUES (?, 0);";
+        String sql = "INSERT INTO question (question, like_counter, roomId) VALUES (?, 0, ?);";
         jdbcTemplate.update(sql, new Object[]{question, roomId});
     }
 
@@ -41,13 +41,13 @@ public class QuestionDao {
         return questions;
     }
 
-    public void delateByID(int id) {
+    public void deleteByID(int id) {
         String sql = "DELETE FROM `question` WHERE `question`.`id` = ?;";
         jdbcTemplate.update(sql, new Object[]{id});
     }
 
-    public void delateAll() {
-        String sql = "DELATE * FROM question";
+    public void deleteAll() {
+        String sql = "DELETE FROM question";
         jdbcTemplate.update(sql, new Object[]{});
     }
 
